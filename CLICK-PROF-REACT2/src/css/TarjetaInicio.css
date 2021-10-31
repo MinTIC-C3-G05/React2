@@ -1,0 +1,22 @@
+
+img{
+    width: 250px;
+    height: 250px;
+}
+
+.TarjetaInicio{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+
+}
+
+.imagenInicio{
+    margin-bottom: 5%;
+    padding: 2%;
+    text-align: center;
+}
+.foto{
+  
+    margin-left: 10%;
+}
