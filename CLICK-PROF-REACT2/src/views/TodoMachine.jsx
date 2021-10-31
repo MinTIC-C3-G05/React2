@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {TodoCounter} from '../components/TodoCounter'
-import {TodoSearch} from '../components/TodoSearch';
-import { TodoList } from '../components/TodoList';
-import { TodoItem } from '../components/TodoItem';
-import { CreateTodoButton } from '../components/CreateTodoButton';
-import {ParaProbar} from '../components/ParaProbar';
+import {TodoCounter} from '../components/TodoMachineComponents/TodoCounter'
+import {TodoSearch} from '../components/TodoMachineComponents/TodoSearch';
+import { TodoList } from '../components/TodoMachineComponents/TodoList';
+import { TodoItem } from '../components/TodoMachineComponents/TodoItem';
+import { CreateTodoButton } from '../components/TodoMachineComponents/CreateTodoButton';
+import {ParaProbar} from '../components/TodoMachineComponents/ParaProbar';
 
 
 const defaultTodos = [
