@@ -105,6 +105,12 @@ export default function Quiz() {
 		},
 	];
 
+
+
+
+
+
+
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
@@ -119,14 +125,27 @@ export default function Quiz() {
 			setCurrentQuestion(nextQuestion);
 		} else {
 			setShowScore(true);
+			
 		}
 	};
+	const startAgain = () =>{
+		setCurrentQuestion(0);
+		setShowScore(false);
+			setScore(0)
+
+	}
+
+
 	return (
 		<div className='app'>
 			{showScore ? (
 				<div className='score-section'>
 					You scored {score} out of {questions.length}
+					<div>
+					<button onClick={startAgain}>START AGAIN</button>
 				</div>
+				</div>
+				
 			) : (
 				<>
 					<div className='question-section'>
@@ -140,6 +159,7 @@ export default function Quiz() {
 							<button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
 						))}
 					</div>
+					
 				</>
 			)}
 		</div>

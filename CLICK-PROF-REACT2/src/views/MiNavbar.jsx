@@ -12,13 +12,17 @@ import Nosotros from "./Nosotros";
 import Quiz from "./Quiz"
 import TodoMachine from "./TodoMachine";
 
+
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 
 import "../css/Navbar.css";
-import QuizPrueba from "./QuizPrueba";
+
+import VideosPage from "./VideosPage";
+import LoginPage from "../components/LoginPage";
+import LoginPageView from "./LoginPageView";
 
 function MiNavbar() {
   return (
@@ -27,15 +31,17 @@ function MiNavbar() {
         <div>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-              <Navbar.Brand href="/">CLICK-PROF!</Navbar.Brand>
+              <Navbar.Brand href="/">CLICK-PROF</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <NavLink className="NavLink" activeClassName="selected" to="/" exact>Home</NavLink>
+                  <NavLink className="NavLink" activeClassName="selected" to="login" exact>Login</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/nosotros">Nosotros</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/todoMachine">To do Machine</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/quiz">Quiz</NavLink>
-                  <NavLink className="NavLink" activeClassName="selected" to="/quizPrueba">Mi Quiz de Prueba</NavLink>
+                  <NavLink className="NavLink" activeClassName="selected" to="/videos">Videos</NavLink>
+                  
                   <NavDropdown className="NavLink" title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">
                       Action
@@ -59,10 +65,14 @@ function MiNavbar() {
 
         <Switch>
           <Route path="/nosotros" component={Nosotros}></Route>
+          <Route path="/login" component={LoginPageView}></Route>
 
           <Route path="/todoMachine" component={TodoMachine}></Route>
           <Route path="/quiz" exact component={Quiz}></Route>
-          <Route path="/quizPrueba" exact component={QuizPrueba}></Route>
+         
+          <Route path="/videos" exact component={VideosPage}></Route>
+         
+        
           <Route path="/" exact component={Home}></Route>
           
         </Switch>
