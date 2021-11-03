@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   NavLink,
 } from "react-router-dom";
 
@@ -21,8 +20,8 @@ import Container from "react-bootstrap/Container";
 import "../css/Navbar.css";
 
 import VideosPage from "./VideosPage";
-import LoginPage from "../components/LoginPage";
 import LoginPageView from "./LoginPageView";
+import PersonList from "./PersonList"
 
 function MiNavbar() {
   return (
@@ -71,6 +70,7 @@ function MiNavbar() {
           <Route path="/quiz" exact component={Quiz}></Route>
          
           <Route path="/videos" exact component={VideosPage}></Route>
+          <Route path="/personList" exact component={PersonList}></Route>
          
         
           <Route path="/" exact component={Home}></Route>

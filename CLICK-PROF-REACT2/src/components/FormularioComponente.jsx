@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 function FormularioComponente() {
   return (
     <React.Fragment>
-      <h2 class="h1-responsive font-weight-bold text-center my-4">
+      <h2 className="h1-responsive font-weight-bold text-center my-4">
         Contact us!
       </h2>
 
@@ -22,12 +22,12 @@ function FormularioComponente() {
           </Form.Group>
         </Row>
 
-        <div class="md-form">
+        <div className="md-form">
           <textarea
             id="message"
             name="message"
             rows="2"
-            class="form-control md-textarea"
+            className="form-control md-textarea"
           ></textarea>
           <label for="message">Message</label>
         </div>

@@ -1,4 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
+import axios from "axios";
+
+
 
 import {TodoCounter} from '../components/TodoMachineComponents/TodoCounter'
 import {TodoSearch} from '../components/TodoMachineComponents/TodoSearch';
@@ -9,16 +12,33 @@ import {ParaProbar} from '../components/TodoMachineComponents/ParaProbar';
 
 
 const defaultTodos = [
-  { text: 'Cortar cebolla', completed: true, edad:'34'},
-  { text: 'Tomar el cursso de intro a React', completed: false },
-  { text: 'Llorar con la llorona', completed: false },
-  { text: 'LALALALAA', completed: false },
-  { text: 'Uno mas', completed: false },
+  { text: 'Cortar cebolla', completed: true},
 ];
 
 const sujeto = {nombre: 'Diego'};
 
 function TodoMachine() {
+
+ 
+
+  const [post, setPost] = React.useState([]);
+  
+    React.useEffect(() => {
+      axios.get("/todos").then((response) => {
+        setPost(response.data);
+        // console.log(response.data)
+        
+      });
+    }, []);
+
+   
+    // post.map(post=>console.log("desde la consola" + post))
+    post.map(post=>defaultTodos.push(post))
+    console.log(defaultTodos)
+
+
+
+
   const [todos, setTodos] = React.useState(defaultTodos)
   const [searchValue, setSearchValue] = React.useState('');
 
