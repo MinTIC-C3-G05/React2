@@ -11,14 +11,14 @@ function FormularioComponente() {
         Contact us!
       </h2>
 
-      <Form>
+      <Form action="https://formsubmit.co/diegohenao819@gmail.com" method="POST">
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" placeholder="Enter your email to contact you!" />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control type="text" placeholder="Subject" />
           </Form.Group>
         </Row>
 
@@ -29,7 +29,7 @@ function FormularioComponente() {
             rows="2"
             className="form-control md-textarea"
           ></textarea>
-          <label for="message">Message</label>
+          <label for="message">Write your Message here!</label>
         </div>
 
         <Button variant="primary" type="submit">
