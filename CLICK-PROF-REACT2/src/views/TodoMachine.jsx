@@ -17,7 +17,7 @@ const defaultTodos = [
 
 const sujeto = {nombre: 'Diego'};
 
-function TodoMachine() {
+function TodoMachine(props) {
 
  
 
@@ -59,6 +59,30 @@ function TodoMachine() {
    
  }
 
+
+
+//  COMPLETAR TODOS
+ const completeTodo = (text) => {
+  const todoIndex = todos.findIndex(todo => todo.text === text);
+  const newTodos = [...todos];
+  newTodos[todoIndex].completed = true;
+  setTodos(newTodos);
+};
+ 
+
+
+// ELIMINAR TODOS
+const deleteTodo = (text) => {
+  const todoIndex = todos.findIndex(todo => todo.text === text);
+  const newTodos = [...todos];
+  newTodos.splice(todoIndex, 1);
+  setTodos(newTodos);
+};
+
+
+
+
+
   return (
     <React.Fragment>
       <TodoCounter 
@@ -76,6 +100,8 @@ function TodoMachine() {
             key={todos.text}
             text={todos.text}
             completed={todos.completed}
+            onComplete={() => completeTodo(todos.text)}
+            onDelete={()=>deleteTodo(todos.text)}
           />
         ))}
       </TodoList>
