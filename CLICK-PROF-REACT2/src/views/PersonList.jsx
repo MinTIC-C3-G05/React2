@@ -1,7 +1,5 @@
 import axios from "axios";
-import React,{useEffect,useState} from "react";
-
-
+import React, { useEffect, useState } from "react";
 
 export default function PersonList() {
   const [post, setPost] = React.useState([]);
@@ -9,8 +7,7 @@ export default function PersonList() {
   React.useEffect(() => {
     axios.get("/todos").then((response) => {
       setPost(response.data);
-      console.log(response.data)
-      
+      console.log(response.data);
     });
   }, []);
 
@@ -18,8 +15,9 @@ export default function PersonList() {
 
   return (
     <div className="col">
-     
-      {post.map(post => <div key={post._id}>{post.todo}</div>)}
+      {post.map((post) => (
+        <div key={post._id}>{post.todo}</div>
+      ))}
     </div>
   );
 }
