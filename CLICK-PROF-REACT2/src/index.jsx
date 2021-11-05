@@ -8,7 +8,7 @@ import axios from 'axios'
 
 
 // BASE URL
-axios.defaults.baseURL = 'http://localhost:4000/api'
+axios.defaults.baseURL = 'https://backend-notas.herokuapp.com/api'
 
 ReactDOM.render(
   <Auth0Provider 
