@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Carousel from 'react-bootstrap/Carousel';
-import Imagen1 from '../img/Image-1.jpg'
-import Imagen2 from '../img/Image-2.png'
-import Imagen3 from '../img/Image-3.png'
+import '../css/ControlledCarousel.css'
 
 
 
@@ -16,41 +14,19 @@ function ControlledCarousel() {
     return (
       <Carousel activeIndex={index} onSelect={handleSelect} variant="dark">
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={Imagen1}
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
+          <div className="VideoSlide">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/saTZ6TRS_HE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={Imagen2}
-            alt="Second slide"
-          />
-  
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
+         <div className="VideoSlide">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Y486eiRm1q8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         </div>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={Imagen3}
-            alt="Third slide"
-          />
-  
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
+          <div className="VideoSlide">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ztrtZ0en8dw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
         </Carousel.Item>
       </Carousel>
     );
