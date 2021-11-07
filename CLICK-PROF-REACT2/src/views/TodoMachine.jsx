@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useFocusEffect } from "react";
+import ReactDOM from 'react-dom';
 import axios from "axios";
 
 import { TodoCounter } from "../components/TodoMachineComponents/TodoCounter";
@@ -8,21 +9,23 @@ import { TodoItem } from "../components/TodoMachineComponents/TodoItem";
 import { CreateTodoButton } from "../components/TodoMachineComponents/CreateTodoButton";
 import { ParaProbar } from "../components/TodoMachineComponents/ParaProbar";
 
-const defaultTodos = [{ text: "Cortar cebolla", completed: true }];
+const defaultTodos = [];
 
-const sujeto = { nombre: "Diego" };
+
 
 function TodoMachine(props) {
   const [post, setPost] = React.useState([]);
+  
+
 
   React.useEffect(() => {
     axios.get("/todos").then((response) => {
       setPost(response.data);
       // console.log(response.data)
     });
-  }, []);
+  },[props]);
 
-  // post.map(post=>console.log("desde la consola" + post))
+
   post.map((post) => defaultTodos.push(post));
   console.log(defaultTodos);
 
@@ -44,6 +47,10 @@ function TodoMachine(props) {
     });
   }
 
+
+
+ 
+
   //  COMPLETAR TODOS
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -54,31 +61,53 @@ function TodoMachine(props) {
 
   // ELIMINAR TODOS
   const deleteTodo = (text) => {
+    console.log("cual es el indice que aparece?"+text)
     const todoIndex = todos.findIndex((todo) => todo.text === text);
     const newTodos = [...todos];
+    axios.delete('/todos/'+text ).then(alert("It was deleted successfully!"))
+        // .then(() => setStatus('Delete successful'));
     newTodos.splice(todoIndex, 1);
     setTodos(newTodos);
   };
 
+  
+  const [ids, setIds] = React.useState(["casa", "carro", "cinco", "tres", "quince"])
+
+  defaultTodos.forEach(element => {
+    console.log(element)
+    
+    ids.push(element)
+    
+  });
+    console.log("los ids son:" + ids)
+
+
   return (
     <React.Fragment>
+      <ParaProbar ></ParaProbar>
       <TodoCounter total={totalTodos} completed={completedTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <TodoList>
         {searchedTodos.map((todos) => (
           <TodoItem
-            key={todos.text}
+            ids = {ids}
+           hola="texto desde todomachine"
+            key={todos._id}
             text={todos.text}
+           
+           
             completed={todos.completed}
             onComplete={() => completeTodo(todos.text)}
-            onDelete={() => deleteTodo(todos.text)}
+            onDelete={() => deleteTodo(todos._id)}
           />
         ))}
+        
       </TodoList>
+      
 
       <CreateTodoButton />
-      <ParaProbar sujeto={sujeto} animal="caballo"></ParaProbar>
+      
     </React.Fragment>
   );
 }
