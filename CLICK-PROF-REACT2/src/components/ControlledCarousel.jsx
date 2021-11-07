@@ -12,7 +12,7 @@ function ControlledCarousel() {
     };
   
     return (
-      <Carousel activeIndex={index} onSelect={handleSelect} variant="dark">
+      <Carousel activeIndex={index} onSelect={handleSelect} variant="dark" slide="false">
         <Carousel.Item>
           <div className="VideoSlide">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/saTZ6TRS_HE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
