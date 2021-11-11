@@ -114,17 +114,43 @@ export default function Quiz() {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
+	const [level, setLevel] = useState("A0")
+
+	const gettingLevel = ()=>{
+		if(score == 1){
+			setLevel("A1")
+		}
+		if(score ==2 || score == 3){
+			setLevel("A2")
+		}
+		if(score ==4 || score == 5){
+			setLevel("B1")
+		}
+		if(score ==6 || score == 7){
+			setLevel("B2")
+		}
+		if(score ==8 || score == 9){
+			setLevel("C1")
+		}
+		if(score ==10){
+			setLevel("C2")
+		}
+	}
 
 	const handleAnswerOptionClick = (isCorrect) => {
 		if (isCorrect) {
+			
 			setScore(score + 1);
+			
 		}
 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
+			gettingLevel() 
 			setShowScore(true);
+			
 			
 		}
 	};
@@ -132,6 +158,7 @@ export default function Quiz() {
 		setCurrentQuestion(0);
 		setShowScore(false);
 			setScore(0)
+			setLevel("A0")
 
 	}
 
@@ -140,10 +167,15 @@ export default function Quiz() {
 		<div className='app'>
 			{showScore ? (
 				<div className='score-section'>
-					You scored {score} out of {questions.length}
+					You scored {score} out of {questions.length} and your level is {level}
+					
 					<div>
+					
 					<button onClick={startAgain}>START AGAIN</button>
+					
 				</div>
+				<br />
+				
 				</div>
 				
 			) : (

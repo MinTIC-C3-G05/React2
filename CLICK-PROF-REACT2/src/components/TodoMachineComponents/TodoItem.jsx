@@ -1,15 +1,19 @@
 import React from 'react';
 import '../../css/TodoItem.css';
+import axios from 'axios';
 
 function TodoItem(props) {
+
+  const [ids, setIds] = React.useState([])
   
-  let {defaultTodos} = props
+
  
   
 
-const updateTodo = (props)=>{
+const updateTodo = (id, text)=>{
   
-  // axios.put('/todos/'+ props._id, article)
+  console.log(id, text)
+  // axios.put('/todos/'+ props.todos._id, todos)
   // .then(response => this.setState({ updatedAt: response.data.updatedAt }));
 }
 
@@ -31,7 +35,7 @@ const updateTodo = (props)=>{
         X
       </span>
       
-     
+     <button onClick={()=>updateTodo(props.todos._id,props.todos.text )}>Update</button>
     </li>
   );
 }

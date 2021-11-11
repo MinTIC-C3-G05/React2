@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,7 +22,7 @@ import "../css/Navbar.css";
 
 import VideosPage from "./VideosPage";
 import LoginPageView from "./LoginPageView";
-import PersonList from "./PersonList"
+
 
 function MiNavbar() {
   return (
@@ -40,6 +41,7 @@ function MiNavbar() {
                   <NavLink className="NavLink" activeClassName="selected" to="/todoMachine">To do Machine</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/quiz">Quiz</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/videos">Videos</NavLink>
+                 
 
                   <NavDropdown className="NavLink" title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">
@@ -70,7 +72,7 @@ function MiNavbar() {
           <Route path="/quiz" exact component={Quiz}></Route>
 
           <Route path="/videos" exact component={VideosPage}></Route>
-          <Route path="/personList" exact component={PersonList}></Route>
+         
 
 
           <Route path="/" exact component={Home}></Route>

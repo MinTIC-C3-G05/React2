@@ -1,5 +1,5 @@
-import React, { useState, useFocusEffect } from "react";
-import ReactDOM from 'react-dom';
+import React, { useState, useFocusEffect,useEffect } from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
 
 import { TodoCounter } from "../components/TodoMachineComponents/TodoCounter";
@@ -11,22 +11,29 @@ import { ParaProbar } from "../components/TodoMachineComponents/ParaProbar";
 
 const defaultTodos = [];
 
-
-
-function TodoMachine(props) {
-  const [post, setPost] = React.useState([]);
+function TodoMachine() {
+  const [datos, setDatos] = useState([]);
+  const useMountEffect = (fun) => useEffect(fun, []);
+  useMountEffect(obtenerTodos); 
+  // useEffect(() => {
+  //   obtenerTodos();
+  //   // axios.get("/todos").then((response) => {
+  //   //   setPost(response.data);
+  //   //   // console.log(response.data)
+  //   // });
+  // }, []);
   
-
-
-  React.useEffect(() => {
+  function obtenerTodos(){
     axios.get("/todos").then((response) => {
-      setPost(response.data);
-      // console.log(response.data)
+      setDatos(response.data);
+      setTodos(response.data)
     });
-  },[props]);
+    
+    // datos.map((datos) => defaultTodos.push(datos));
+    
+  }
 
-
-  post.map((post) => defaultTodos.push(post));
+  
   console.log(defaultTodos);
 
   const [todos, setTodos] = React.useState(defaultTodos);
@@ -47,10 +54,6 @@ function TodoMachine(props) {
     });
   }
 
-
-
- 
-
   //  COMPLETAR TODOS
   const completeTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -61,53 +64,38 @@ function TodoMachine(props) {
 
   // ELIMINAR TODOS
   const deleteTodo = (text) => {
-    console.log("cual es el indice que aparece?"+text)
+    console.log("cual es el indice que aparece?" + text);
     const todoIndex = todos.findIndex((todo) => todo.text === text);
     const newTodos = [...todos];
-    axios.delete('/todos/'+text ).then(alert("It was deleted successfully!"))
-        // .then(() => setStatus('Delete successful'));
+    axios.delete("/todos/" + text).then(alert("It was deleted successfully!"));
+    // .then(() => setStatus('Delete successful'));
     newTodos.splice(todoIndex, 1);
     setTodos(newTodos);
   };
 
   
-  const [ids, setIds] = React.useState(["casa", "carro", "cinco", "tres", "quince"])
-
-  defaultTodos.forEach(element => {
-    console.log(element)
-    
-    ids.push(element)
-    
-  });
-    console.log("los ids son:" + ids)
-
 
   return (
     <React.Fragment>
-      <ParaProbar ></ParaProbar>
+      <ParaProbar></ParaProbar>
       <TodoCounter total={totalTodos} completed={completedTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <TodoList>
         {searchedTodos.map((todos) => (
           <TodoItem
-            ids = {ids}
-           hola="texto desde todomachine"
+            todos={todos}
+            hola="texto desde todomachine"
             key={todos._id}
             text={todos.text}
-           
-           
             completed={todos.completed}
             onComplete={() => completeTodo(todos.text)}
             onDelete={() => deleteTodo(todos._id)}
           />
         ))}
-        
       </TodoList>
-      
 
       <CreateTodoButton />
-      
     </React.Fragment>
   );
 }
