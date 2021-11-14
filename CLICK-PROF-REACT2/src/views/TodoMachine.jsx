@@ -14,7 +14,8 @@ const defaultTodos = [];
 function TodoMachine() {
   const [datos, setDatos] = useState([]);
   const useMountEffect = (fun) => useEffect(fun, []);
-  let actualizado = [false]
+  const [actualizado, setActualizado] = useState(0)
+  
   useMountEffect(obtenerTodos); 
   useEffect(() => {
     obtenerTodos();
@@ -22,7 +23,7 @@ function TodoMachine() {
     //   setPost(response.data);
     //   // console.log(response.data)
     // });
-  }, []);
+  }, [actualizado]);
   
   function obtenerTodos(){
     axios.get("/todos").then((response) => {
@@ -94,7 +95,9 @@ function TodoMachine() {
             completed={todos.completed}
             onComplete={() => completeTodo(todos.text)}
             onDelete={() => deleteTodo(todos._id)}
+            setTodos = {setTodos}
             actualizado = {actualizado}
+            setActualizado = {setActualizado}
           />
         ))}
       </TodoList>

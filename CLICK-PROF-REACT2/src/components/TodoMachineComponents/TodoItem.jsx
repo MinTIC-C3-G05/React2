@@ -16,7 +16,9 @@ const updateTodo = (id, text)=>{
   let cambio = prompt("editar")
   console.log(cambio)
   const data = {text: cambio}
-  axios.put("/todos/"+ id, data).then(alert("el todo: " + text + "ha sido actualizado"));
+  axios.put("/todos/"+ id, data).then(alert("el todo: '" + text + "' ha sido actualizado"));
+  props.setActualizado(props.actualizado + 1)
+  
   
 }
 
@@ -38,7 +40,7 @@ const updateTodo = (id, text)=>{
         X
       </span>
       
-     <button onClick={()=>updateTodo(props.todos._id,props.todos.text )}>{props.todos._id}</button>
+     <button onClick={()=>updateTodo(props.todos._id,props.todos.text )}>UPDATE</button>
     </li>
   );
 }
