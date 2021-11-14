@@ -94,7 +94,7 @@ export default function Quiz() {
 			],
 		},
         {   
-            
+            instructions:"Complete the gap with the correct option",
 			questionText: 'If I were you, _______',
 			answerOptions: [
 				{ answerText: 'I will get a new job', isCorrect: false },
@@ -114,41 +114,46 @@ export default function Quiz() {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
-	const [level, setLevel] = useState("A0")
+	const [level, setLevel] = useState("")
 
 	const gettingLevel = ()=>{
-		if(score == 1){
+		
+		
+		if(score === 1 ){
 			setLevel("A1")
 		}
-		if(score ==2 || score == 3){
+		else if(score ===2 || score ===3){
 			setLevel("A2")
 		}
-		if(score ==4 || score == 5){
+		else if(score ===4 || score === 5){
 			setLevel("B1")
 		}
-		if(score ==6 || score == 7){
+		else if(score ===6 || score === 7){
 			setLevel("B2")
 		}
-		if(score ==8 || score == 9){
+		else if(score ===8 ){
 			setLevel("C1")
 		}
-		if(score ==10){
+		else if(score ===9){
 			setLevel("C2")
 		}
+		console.log("hola al final del if")
+		
 	}
 
 	const handleAnswerOptionClick = (isCorrect) => {
 		if (isCorrect) {
 			
 			setScore(score + 1);
+			gettingLevel();
 			
 		}
 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
+			
 			setCurrentQuestion(nextQuestion);
 		} else {
-			gettingLevel() 
 			setShowScore(true);
 			
 			
@@ -184,11 +189,11 @@ export default function Quiz() {
 						<div className='question-count'>
 							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
-						<div className='question-text' key="questionText">{questions[currentQuestion].questionText}</div>
+						<div className='question-text' key={questions.questionText}>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
 						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)} key="answerText">{answerOption.answerText}</button>
+							<button onClick={() => handleAnswerOptionClick(answerOption.isCorrect)} key={questions.answerText}>{answerOption.answerText}</button>
 						))}
 					</div>
 					

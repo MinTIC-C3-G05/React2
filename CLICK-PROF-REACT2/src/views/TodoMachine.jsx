@@ -1,4 +1,4 @@
-import React, { useState, useFocusEffect,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
@@ -14,24 +14,27 @@ const defaultTodos = [];
 function TodoMachine() {
   const [datos, setDatos] = useState([]);
   const useMountEffect = (fun) => useEffect(fun, []);
+  let actualizado = [false]
   useMountEffect(obtenerTodos); 
-  // useEffect(() => {
-  //   obtenerTodos();
-  //   // axios.get("/todos").then((response) => {
-  //   //   setPost(response.data);
-  //   //   // console.log(response.data)
-  //   // });
-  // }, []);
+  useEffect(() => {
+    obtenerTodos();
+    // axios.get("/todos").then((response) => {
+    //   setPost(response.data);
+    //   // console.log(response.data)
+    // });
+  }, []);
   
   function obtenerTodos(){
     axios.get("/todos").then((response) => {
       setDatos(response.data);
       setTodos(response.data)
     });
-    
+    }
+
+
     // datos.map((datos) => defaultTodos.push(datos));
     
-  }
+  
 
   
   console.log(defaultTodos);
@@ -91,6 +94,7 @@ function TodoMachine() {
             completed={todos.completed}
             onComplete={() => completeTodo(todos.text)}
             onDelete={() => deleteTodo(todos._id)}
+            actualizado = {actualizado}
           />
         ))}
       </TodoList>

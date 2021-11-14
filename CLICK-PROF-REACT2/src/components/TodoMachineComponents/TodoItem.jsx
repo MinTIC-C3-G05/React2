@@ -13,8 +13,11 @@ function TodoItem(props) {
 const updateTodo = (id, text)=>{
   
   console.log(id, text)
-  // axios.put('/todos/'+ props.todos._id, todos)
-  // .then(response => this.setState({ updatedAt: response.data.updatedAt }));
+  let cambio = prompt("editar")
+  console.log(cambio)
+  const data = {text: cambio}
+  axios.put("/todos/"+ id, data).then(alert("el todo: " + text + "ha sido actualizado"));
+  
 }
 
   return (
@@ -35,7 +38,7 @@ const updateTodo = (id, text)=>{
         X
       </span>
       
-     <button onClick={()=>updateTodo(props.todos._id,props.todos.text )}>Update</button>
+     <button onClick={()=>updateTodo(props.todos._id,props.todos.text )}>{props.todos._id}</button>
     </li>
   );
 }

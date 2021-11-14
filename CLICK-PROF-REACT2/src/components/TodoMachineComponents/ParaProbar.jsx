@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function ParaProbar(props) {
@@ -6,7 +6,7 @@ function ParaProbar(props) {
   const [newTodo, setNewTodo] = useState({ text: "", completed: false });
 
   const handleChange = (e) => {
-    const miNuevoTodo = e.target.value;
+    // const miNuevoTodo = e.target.value;
     setNewTodo({ ...newTodo, text: e.target.value });
     console.log(newTodo);
   };
