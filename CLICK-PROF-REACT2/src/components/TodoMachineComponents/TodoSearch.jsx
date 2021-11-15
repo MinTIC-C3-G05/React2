@@ -14,7 +14,7 @@ function TodoSearch({searchValue, setSearchValue}) {
     <React.Fragment>
     <input 
     className="TodoSearch" 
-    placeholder="Cebolla" 
+    placeholder="Search your to-do" 
     value = {searchValue}
     onChange = {onSearchValueChange}
     />

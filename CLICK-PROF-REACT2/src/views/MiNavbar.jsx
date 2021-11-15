@@ -22,6 +22,7 @@ import "../css/Navbar.css";
 
 import VideosPage from "./VideosPage";
 import LoginPageView from "./LoginPageView";
+import Vocabulary from "./Vocabulary";
 
 
 function MiNavbar() {
@@ -37,7 +38,7 @@ function MiNavbar() {
                 <Nav className="me-auto">
                   <NavLink className="NavLink" activeClassName="selected" to="/" exact>Home</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="login" exact>Login</NavLink>
-                  <NavLink className="NavLink" activeClassName="selected" to="/nosotros">Nosotros</NavLink>
+                  <NavLink className="NavLink" activeClassName="selected" to="/vocabulary">Vocabulary</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/todoMachine">To do Machine</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/quiz">Quiz</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/videos">Videos</NavLink>
@@ -72,6 +73,7 @@ function MiNavbar() {
           <Route path="/quiz" exact component={Quiz}></Route>
 
           <Route path="/videos" exact component={VideosPage}></Route>
+          <Route path="/vocabulary" exact component={Vocabulary}></Route>
          
 
 

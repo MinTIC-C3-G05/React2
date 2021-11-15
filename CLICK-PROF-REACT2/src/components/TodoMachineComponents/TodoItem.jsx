@@ -17,6 +17,7 @@ const updateTodo = (id, text)=>{
   console.log(cambio)
   const data = {text: cambio}
   axios.put("/todos/"+ id, data).then(alert("el todo: '" + text + "' ha sido actualizado"));
+  // setTimeout(() => console.log(alert("time out")), 5000);
   props.setActualizado(props.actualizado + 1)
   
   
