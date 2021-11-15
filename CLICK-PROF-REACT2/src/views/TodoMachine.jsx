@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import ReactDOM from "react-dom";
+
 import axios from "axios";
 
 import { TodoCounter } from "../components/TodoMachineComponents/TodoCounter";
@@ -12,11 +12,10 @@ import { ParaProbar } from "../components/TodoMachineComponents/ParaProbar";
 const defaultTodos = [];
 
 function TodoMachine() {
-  const [datos, setDatos] = useState([]);
-  const useMountEffect = (fun) => useEffect(fun, []);
+  // const useMountEffect = (fun) => useEffect(fun, []);
   const [actualizado, setActualizado] = useState(0)
   
-  useMountEffect(obtenerTodos); 
+
   useEffect(() => {
     obtenerTodos();
     // axios.get("/todos").then((response) => {
@@ -27,7 +26,7 @@ function TodoMachine() {
   
   function obtenerTodos(){
     axios.get("/todos").then((response) => {
-      setDatos(response.data);
+      
       setTodos(response.data)
     });
     }
@@ -48,7 +47,7 @@ function TodoMachine() {
 
   let searchedTodos = [];
 
-  if (searchValue.length == 0) {
+  if (searchValue.length === 0) {
     searchedTodos = todos;
   } else {
     searchedTodos = todos.filter((item) => {

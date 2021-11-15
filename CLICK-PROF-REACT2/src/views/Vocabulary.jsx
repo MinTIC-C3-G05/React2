@@ -57,20 +57,20 @@ function Vocabulary() {
                 <td>{index+1}</td>
                 <td>{palabra.englishWord}</td>
                 <td>{palabra.definition}</td>
-                <td>EDIT</td>
-                <td>Delete</td>
+                <td><button className="btn btn-warning">EDIT</button></td>
+                <td><button className="btn btn-danger">Delete</button></td>
             </tr>
         )
     }
 
     return (
         <React.Fragment>
-            <div>
-                <h1>VOCABULARY LIST</h1>
+            <div style={{textAlign:"center"}}>
+                <h1 className="display-1">VOCABULARY LIST</h1>
             </div>
             <div>
                 <form onSubmit={handleSubmit} className="form">
-                    <label class="form-label">NEW ENGLISH WORD</label>
+                    <label className="form-label">NEW ENGLISH WORD</label>
                     <input
                         className="form-control"
                         type="text"
@@ -78,7 +78,7 @@ function Vocabulary() {
                         placeholder="Write your new English word"
                         onChange={captureEnglishword}
                     />
-                    <label class="form-label">Definition</label>
+                    <label className="form-label">Definition</label>
                     <input
                         className="form-control"
                         type="text"
@@ -90,20 +90,23 @@ function Vocabulary() {
                 </form>
             </div>
 
-            <div>
-                <h1>YOUR VOCABULARY</h1>
+            <div style={{textAlign:"center"}}>
+                <h1 className="display-3" className="text-muted">YOUR VOCABULARY</h1>
             </div>
 
           
 
 
             {/* table */}
-            <table className="table table-striped">
+            <table className="table table-striped" style={{textAlign:"center"}}>
                 <thead>
                     <tr>
                     <th>NUMBER</th>
                         <th>ENGLISH WORD</th>
                         <th>DEFINTION</th>
+                        <th><button className="btn btn-primary">Hide definitions</button></th>
+                        <th><button className="btn btn-primary">Show definitions</button></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
