@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../css/vocabulary.css"
 
 function Vocabulary() {
     const [englishWord, setenglishWord] = useState("");
     const [definition, setDefinition] = useState("");
     const [palabras, setPalabras] = useState([])
+    const [actualizar, setActualizar] = useState(0)
+    const [ocultarDefinition, setOcultarDefinition] = useState("show")
     const newPair = {
         englishWord: englishWord,
         definition: definition,
@@ -16,7 +19,7 @@ function Vocabulary() {
         axios.get("/vocabulary").then((response) => {
             setPalabras(response.data);
         });
-    }, []);
+    }, [actualizar]);
     //    FIN GET 
 
 
@@ -41,11 +44,46 @@ function Vocabulary() {
         axios
             .post("/vocabulary", newPair)
             //   .then((response) => this.setState({ newPair: response.data }))
-            .then(alert(JSON.stringify(newPair)));
+            .then(setActualizar(actualizar+1));
     };
-    // FIN DE NUEVO PAR DE PALABRAS
+    // FIN DE POST NUEVO PAR DE PALABRAS
 
 
+
+
+    // DELETE PALABRAS
+    const deletePalabra= (id)=>{
+       
+            console.log(id);
+           
+            axios.delete("/vocabulary/" + id).then(alert("It was deleted successfully!")).then(setActualizar(actualizar+1));
+           
+          };
+
+
+    // ACTUALIZAR PALABRAS
+    const updatePalabras = (id, text)=>{
+  
+        console.log(id, text)
+        let cambioEnglishWord = prompt("Edit your English Word")
+        let cambioDefinition = prompt("Edit your Defition")
+        console.log(cambioEnglishWord + cambioDefinition)
+        const data = {englishWord: cambioEnglishWord, definition: cambioDefinition }
+        axios.put("/vocabulary/"+ id, data).then(alert("The word: '" + text + "' has been updated"));
+        // setTimeout(() => console.log(alert("time out")), 5000);
+        setActualizar(actualizar + 1)
+        
+        
+      }
+    
+
+    //   ESCONDER Y MOSTRAR DEFINITIONS
+    const hideDefinitions=()=>{
+        setOcultarDefinition("ocultarDefinition")
+    }
+    const showDefinitions=()=>{
+        setOcultarDefinition("show")
+    }
 
 
 
@@ -54,59 +92,67 @@ function Vocabulary() {
     const renderPalabras = (palabra, index) => {
         return (
             <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>{palabra.englishWord}</td>
-                <td>{palabra.definition}</td>
-                <td><button className="btn btn-warning">EDIT</button></td>
-                <td><button className="btn btn-danger">Delete</button></td>
+                <td className={ocultarDefinition}>{palabra.definition}</td>
+                <td><button className="btn btn-warning" onClick={()=>updatePalabras(palabra._id, palabra.englishWord  )}>EDIT</button></td>
+                <td><button className="btn btn-danger" onClick={()=>deletePalabra(palabra._id)}>Delete</button></td>
             </tr>
         )
     }
 
+
+
+
+    // RETURN
     return (
         <React.Fragment>
-            <div style={{textAlign:"center"}}>
+            <div style={{ textAlign: "center" }}>
                 <h1 className="display-1">VOCABULARY LIST</h1>
             </div>
-            <div>
-                <form onSubmit={handleSubmit} className="form">
+            <div className=" d-flex justify-content-center " style={{backgroundColor:"gray", borderRadius:"19px", textAlign:"center", fontSize:"30px"}}>
+                <form onSubmit={handleSubmit} className="form  ">
                     <label className="form-label">NEW ENGLISH WORD</label>
                     <input
-                        className="form-control"
+                        className="form-control  "
                         type="text"
                         name="englishWord"
                         placeholder="Write your new English word"
                         onChange={captureEnglishword}
                     />
-                    <label className="form-label">Definition</label>
+                    <label className="form-label ">Definition</label>
                     <input
-                        className="form-control"
+                        className="form-control "
                         type="text"
                         name="definition"
                         placeholder="Write your definition"
                         onChange={captureDefinition}
                     />
-                    <button className="btn btn-success">create new pair</button>
+                    <div style={{display:"block", padding:"15px", width:"100%"}} >
+                    <button className="btn btn-success" style={{display:"block", padding:"15px", width:"100%"}} >create new pair</button>
+                    </div>
+                     
                 </form>
+               
             </div>
 
-            <div style={{textAlign:"center"}}>
+            <div style={{ textAlign: "center" }}>
                 <h1 className="display-3" className="text-muted">YOUR VOCABULARY</h1>
             </div>
 
-          
+
 
 
             {/* table */}
-            <table className="table table-striped" style={{textAlign:"center"}}>
+            <table className="table table-striped" style={{ textAlign: "center" }}>
                 <thead>
                     <tr>
-                    <th>NUMBER</th>
+                        <th>NUMBER</th>
                         <th>ENGLISH WORD</th>
                         <th>DEFINTION</th>
-                        <th><button className="btn btn-primary">Hide definitions</button></th>
-                        <th><button className="btn btn-primary">Show definitions</button></th>
-                        
+                        <th><button className="btn btn-primary" onClick={hideDefinitions} >Hide definitions</button></th>
+                        <th><button className="btn btn-primary" onClick={showDefinitions}>Show definitions</button></th>
+
                     </tr>
                 </thead>
                 <tbody>
