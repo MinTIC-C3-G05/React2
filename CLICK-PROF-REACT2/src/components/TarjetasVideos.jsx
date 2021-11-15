@@ -38,35 +38,38 @@ let CardNum = numRandom();
 
 const TarjetasVideos = () => {
     return (
-      <div>
-        <CardGroup>
-          <Card>
-        
-            <Card.Body>
-                <iframe width="560" height="315" src={videos[CardNum]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
-          </Card>
-          <Card>
-            <Card.Body>
-                <iframe width="560" height="315" src={videos[CardNum + 1]}  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
-          </Card>
-          <Card>
-            <Card.Body>
-                <iframe width="560" height="315" src={videos[CardNum - 1]}  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
-          </Card>
-        </CardGroup>
-      </div>
+      <div class="container">
+			<h3>Tendencias</h3>
+			    	<div class="row">
+			    	<div class="col-4">
+			    		<div class="card">
+              <iframe width="360" height="315" src={videos[CardNum]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+			    			<div class="card-body">
+                <Card.Footer>
+                  <small className="text-muted">Last updated 3 mins ago</small>
+                </Card.Footer>
+			    			</div>
+			    		</div>
+			    	<div class="col-4">
+			    		<div class="card">
+              <iframe width="360" height="315" src={videos[CardNum + 1]}  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+			    			<div class="card-body">
+                <Card.Footer>
+                  <small className="text-muted">Last updated 3 mins ago</small>
+                </Card.Footer>
+			    			</div>
+			    		</div>
+			    	<div class="col-4">
+			    		<div class="card">
+              <iframe width="360" height="315" src={videos[CardNum - 1]}  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+			    			<div class="card-body">
+                <Card.Footer>
+                  <small className="text-muted">Last updated 3 mins ago</small>
+                </Card.Footer>
+			    			</div>
+			    		</div>
+			    </div>  
+        </div>
     );
   };
   

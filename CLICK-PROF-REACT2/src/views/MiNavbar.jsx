@@ -35,7 +35,7 @@ function MiNavbar() {
               <Navbar.Brand href="/">CLICK-PROF</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+              <Nav className="justify-content-center" style={{ flex: 1}}>
                   <NavLink className="NavLink" activeClassName="selected" to="/" exact>Home</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="login" exact>Login</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/vocabulary">Vocabulary</NavLink>

@@ -4,15 +4,21 @@
     padding: 5px;
     border-radius: 6px;
     margin-right: 5px;
-    background-color: blue;
+    /*background-color: blue;*/
     text-decoration: none;
     color: white;
+    top: -8px;
 }
+
+
+
 h1{
     color: blue;
 }
 
+/*
 .selected{
     background-color: rgba(0, 0, 255, 0.418);
     transition: 0.5s;
 }
+*/
