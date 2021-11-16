@@ -1,12 +1,18 @@
 import React from 'react'
 import Logo from '../img/CLIK_PROF_LOGO.png';
+
 import '../css/TarjetaInicio.css'
 
+import { useHistory } from 'react-router-dom';
+
 function TarjetaInicio() {
+
+  const history = useHistory();
+
     return (
         <div>
         <section className="TarjetaInicio">
-        <h1>CLICK-PROF <small class="text-muted" >Do you want to test your English? </small></h1>
+        <h1>CLICK-PROF <small className="text-muted" >Do you want to test your English? </small></h1>
         <h4>Take our diagnostic test!</h4>
       </section>
     
@@ -19,7 +25,7 @@ function TarjetaInicio() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam maiores perspiciatis iure assumenda aliquam
               repudiandae sequi illum fuga, minus itaque culpa placeat dolores, corporis blanditiis. Commodi rerum fugit vel
               quaerat. </p>
-            <button className="button btn-primary EnglishTest" Onclick="location.href='EnglishLevelTest_p1.html'">ENGLISH TEST
+            <button className="button btn-primary EnglishTest" onClick={() => history.push('/quiz')}>ENGLISH TEST
             </button>
           </div>
           <div className="col-sm-3 col-md-3 foto" >

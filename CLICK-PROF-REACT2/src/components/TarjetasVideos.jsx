@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import CardGroup from "react-bootstrap/CardGroup";
+
 
 let videos = ['https://www.youtube.com/embed/jaxgeXPgAz0',
  'https://www.youtube.com/embed/lX6JcybgDFo', 

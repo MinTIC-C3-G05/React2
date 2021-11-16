@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/vocabulary.css"
+import {useAuth0} from '@auth0/auth0-react'
+import LoginPage from "../components/LoginPage"
 
 function Vocabulary() {
+    const {user, isAuthenticated, isLoading} = useAuth0()
     const [englishWord, setenglishWord] = useState("");
     const [definition, setDefinition] = useState("");
     const [palabras, setPalabras] = useState([])
@@ -44,7 +47,7 @@ function Vocabulary() {
         axios
             .post("/vocabulary", newPair)
             //   .then((response) => this.setState({ newPair: response.data }))
-            .then(setActualizar(actualizar+1));
+            .then(setActualizar(actualizar + 1));
     };
     // FIN DE POST NUEVO PAR DE PALABRAS
 
@@ -52,36 +55,36 @@ function Vocabulary() {
 
 
     // DELETE PALABRAS
-    const deletePalabra= (id)=>{
-       
-            console.log(id);
-           
-            axios.delete("/vocabulary/" + id).then(alert("It was deleted successfully!")).then(setActualizar(actualizar+1));
-           
-          };
+    const deletePalabra = (id) => {
+
+        console.log(id);
+
+        axios.delete("/vocabulary/" + id).then(alert("It was deleted successfully!")).then(setActualizar(actualizar + 1));
+
+    };
 
 
     // ACTUALIZAR PALABRAS
-    const updatePalabras = (id, text)=>{
-  
+    const updatePalabras = (id, text) => {
+
         console.log(id, text)
         let cambioEnglishWord = prompt("Edit your English Word")
         let cambioDefinition = prompt("Edit your Defition")
         console.log(cambioEnglishWord + cambioDefinition)
-        const data = {englishWord: cambioEnglishWord, definition: cambioDefinition }
-        axios.put("/vocabulary/"+ id, data).then(alert("The word: '" + text + "' has been updated"));
+        const data = { englishWord: cambioEnglishWord, definition: cambioDefinition }
+        axios.put("/vocabulary/" + id, data).then(alert("The word: '" + text + "' has been updated"));
         // setTimeout(() => console.log(alert("time out")), 5000);
         setActualizar(actualizar + 1)
-        
-        
-      }
-    
+
+
+    }
+
 
     //   ESCONDER Y MOSTRAR DEFINITIONS
-    const hideDefinitions=()=>{
+    const hideDefinitions = () => {
         setOcultarDefinition("ocultarDefinition")
     }
-    const showDefinitions=()=>{
+    const showDefinitions = () => {
         setOcultarDefinition("show")
     }
 
@@ -91,12 +94,12 @@ function Vocabulary() {
     // RENDER TABLE WITH DATA
     const renderPalabras = (palabra, index) => {
         return (
-            <tr key={index}>
+            <tr key={palabra._id}>
                 <td>{index + 1}</td>
                 <td>{palabra.englishWord}</td>
                 <td className={ocultarDefinition}>{palabra.definition}</td>
-                <td><button className="btn btn-warning" onClick={()=>updatePalabras(palabra._id, palabra.englishWord  )}>EDIT</button></td>
-                <td><button className="btn btn-danger" onClick={()=>deletePalabra(palabra._id)}>Delete</button></td>
+                <td><button className="btn btn-warning" onClick={() => updatePalabras(palabra._id, palabra.englishWord)}>EDIT</button></td>
+                <td><button className="btn btn-danger" onClick={() => deletePalabra(palabra._id)}>Delete</button></td>
             </tr>
         )
     }
@@ -104,13 +107,17 @@ function Vocabulary() {
 
 
 
+    
+
     // RETURN
+    if (isAuthenticated){
     return (
         <React.Fragment>
+            
             <div style={{ textAlign: "center" }}>
                 <h1 className="display-1">VOCABULARY LIST</h1>
             </div>
-            <div className=" d-flex justify-content-center " style={{backgroundColor:"gray", borderRadius:"19px", textAlign:"center", fontSize:"30px"}}>
+            <div className=" d-flex justify-content-center " style={{ backgroundColor: "gray", borderRadius: "19px", textAlign: "center", fontSize: "30px" }}>
                 <form onSubmit={handleSubmit} className="form  ">
                     <label className="form-label">NEW ENGLISH WORD</label>
                     <input
@@ -128,12 +135,12 @@ function Vocabulary() {
                         placeholder="Write your definition"
                         onChange={captureDefinition}
                     />
-                    <div style={{display:"block", padding:"15px", width:"100%"}} >
-                    <button className="btn btn-success" style={{display:"block", padding:"15px", width:"100%"}} >create new pair</button>
+                    <div style={{ display: "block", padding: "15px", width: "100%" }} >
+                        <button className="btn btn-success" style={{ display: "block", padding: "15px", width: "100%" }} >create new pair</button>
                     </div>
-                     
+
                 </form>
-               
+
             </div>
 
             <div style={{ textAlign: "center" }}>
@@ -160,7 +167,15 @@ function Vocabulary() {
                 </tbody>
             </table>
         </React.Fragment>
+        
     );
+}
+return(
+    <React.Fragment>
+    <h1>PLEASE LOG IN</h1>
+    <LoginPage/>
+    </React.Fragment>
+)
 }
 
 export default Vocabulary;

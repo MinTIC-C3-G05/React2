@@ -13,14 +13,14 @@ function FormularioComponente() {
 
       <Form action="https://formsubmit.co/diegohenao819@gmail.com" method="POST">
       <Row className="mb-3">
-        <div class="col-md-8 offset-md-2">
+        <div className="col-md-8 offset-md-2">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Control type="email" placeholder="Enter your email to contact you!" />
           </Form.Group>
           </div>
         </Row>
         <Row className="mb-3">
-        <div class="col-md-8 offset-md-2">
+        <div className="col-md-8 offset-md-2">
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Control type="text" placeholder="Subject" />
           </Form.Group>
@@ -28,19 +28,19 @@ function FormularioComponente() {
         </Row>
 
         <div className="md-form">
-        <div class="col-md-8 offset-md-2">
+        <div className="col-md-8 offset-md-2">
           <textarea
             id="message"
             name="message"
             rows="2"
             className="form-control md-textarea"
           ></textarea>
-          <label for="message">Write your Message here!</label>
+          <label htmlFor="message">Write your Message here!</label>
         </div>
         </div>
 
-        <div class="container-fluid">
-				<div class="col-md-12 text-center">
+        <div className="container-fluid">
+				<div className="col-md-12 text-center">
         <Button variant="primary" id="boton" type="submit"
          style={{
           //display:'flex',
