@@ -1,63 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/vocabulary.css"
-import {useAuth0} from '@auth0/auth0-react'
+import { useAuth0 } from '@auth0/auth0-react'
 import LoginPage from "../components/LoginPage"
 
 function Vocabulary() {
-    const {user, isAuthenticated, isLoading} = useAuth0()
+    const { user, isAuthenticated, isLoading } = useAuth0()
     const [englishWord, setenglishWord] = useState("");
     const [definition, setDefinition] = useState("");
     const [palabras, setPalabras] = useState([])
     const [actualizar, setActualizar] = useState(0)
     const [ocultarDefinition, setOcultarDefinition] = useState("show")
-   
 
-    
 
-       // GET PALABRAS BASE DE DATOS
-    
-   useEffect(() => {
-      setTimeout(()=>{
-          console.log("it's ready!")
-      
 
-       
+
+    // GET PALABRAS BASE DE DATOS
+
+    useEffect(() => {
+        if(isAuthenticated){
+
+
             axios.get("/vocabulary").then((response) => {
-    
-    
-                response.data.map(registro=>{
-                    if(registro.email === user.email){
-                        
+                response.data.map(registro => {
+                    if (registro.email === user.email) {
                         console.log(registro)
                         palabras.push(registro)
-                    }else{
-                        return
+                        
+                        
                     }
                 })
+            })
 
-            },9000)
-            });
-    
 
-    
-}, [actualizar]);
-//    FIN GET 
+        }
+        
 
- 
+    }, []);
+    //    FIN GET 
 
 
 
     // POST NUEVO PAR DE PALABRAS
     const captureEnglishword = (e) => {
         setenglishWord(e.target.value);
+        console.log(e.target.value)
     };
     const captureDefinition = (e) => {
         setDefinition(e.target.value);
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(newPair);
+        
 
         const newPair = {
             englishWord: englishWord,
@@ -120,6 +114,7 @@ function Vocabulary() {
 
     // RENDER TABLE WITH DATA
     const renderPalabras = (palabra, index) => {
+        
         return (
             <tr key={palabra._id}>
                 <td>{index + 1}</td>
@@ -131,81 +126,83 @@ function Vocabulary() {
         )
     }
 
+   
 
 
-
+    // *****************************************************************************************************
     
 
     // RETURN
-    if (isAuthenticated){
+    if (isAuthenticated) {
+       
+        return (
+            <React.Fragment>
+                <div>
+                    <h4 className="text-muted">WELCOME {user.name}</h4>
+                    <h4 className="text-muted"> {user.email}</h4>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                    <h1 className="display-1">VOCABULARY LIST</h1>
+                </div>
+                <div className=" d-flex justify-content-center " style={{ backgroundColor: "gray", borderRadius: "19px", textAlign: "center", fontSize: "30px" }}>
+                    <form onSubmit={handleSubmit} className="form  ">
+                        <label className="form-label">NEW ENGLISH WORD</label>
+                        <input
+                            className="form-control  "
+                            type="text"
+                            name="englishWord"
+                            placeholder="Write your new English word"
+                            onChange={captureEnglishword}
+                        />
+                        <label className="form-label ">Definition</label>
+                        <input
+                            className="form-control "
+                            type="text"
+                            name="definition"
+                            placeholder="Write your definition"
+                            onChange={captureDefinition}
+                        />
+                        <div style={{ display: "block", padding: "15px", width: "100%" }} >
+                            <button className="btn btn-success" style={{ display: "block", padding: "15px", width: "100%" }} >create new pair</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div style={{ textAlign: "center" }}>
+                    <h1 className="display-3" className="text-muted">YOUR VOCABULARY</h1>
+                </div>
+
+
+
+
+                {/* table */}
+                <table className="table table-striped" style={{ textAlign: "center" }}>
+                    <thead>
+                        <tr>
+                            <th>NUMBER</th>
+                            <th>ENGLISH WORD</th>
+                            <th>DEFINTION</th>
+                            <th><button className="btn btn-primary" onClick={hideDefinitions} >Hide definitions</button></th>
+                            <th><button className="btn btn-primary" onClick={showDefinitions}>Show definitions</button></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {palabras.map(renderPalabras)}
+                    </tbody>
+                </table>
+            </React.Fragment>
+
+        );
+    }
     return (
         <React.Fragment>
-            <div>
-                <h4 className="text-muted">WELCOME {user.name}</h4>
-                <h4 className="text-muted"> {user.email}</h4>
-            </div>
-            <div style={{ textAlign: "center" }}>
-                <h1 className="display-1">VOCABULARY LIST</h1>
-            </div>
-            <div className=" d-flex justify-content-center " style={{ backgroundColor: "gray", borderRadius: "19px", textAlign: "center", fontSize: "30px" }}>
-                <form onSubmit={handleSubmit} className="form  ">
-                    <label className="form-label">NEW ENGLISH WORD</label>
-                    <input
-                        className="form-control  "
-                        type="text"
-                        name="englishWord"
-                        placeholder="Write your new English word"
-                        onChange={captureEnglishword}
-                    />
-                    <label className="form-label ">Definition</label>
-                    <input
-                        className="form-control "
-                        type="text"
-                        name="definition"
-                        placeholder="Write your definition"
-                        onChange={captureDefinition}
-                    />
-                    <div style={{ display: "block", padding: "15px", width: "100%" }} >
-                        <button className="btn btn-success" style={{ display: "block", padding: "15px", width: "100%" }} >create new pair</button>
-                    </div>
-
-                </form>
-
-            </div>
-
-            <div style={{ textAlign: "center" }}>
-                <h1 className="display-3" className="text-muted">YOUR VOCABULARY</h1>
-            </div>
-
-
-
-
-            {/* table */}
-            <table className="table table-striped" style={{ textAlign: "center" }}>
-                <thead>
-                    <tr>
-                        <th>NUMBER</th>
-                        <th>ENGLISH WORD</th>
-                        <th>DEFINTION</th>
-                        <th><button className="btn btn-primary" onClick={hideDefinitions} >Hide definitions</button></th>
-                        <th><button className="btn btn-primary" onClick={showDefinitions}>Show definitions</button></th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {palabras.map(renderPalabras)}
-                </tbody>
-            </table>
+            <h1>PLEASE LOG IN</h1>
+            <LoginPage />
         </React.Fragment>
-        
-    );
-}
-return(
-    <React.Fragment>
-    <h1>PLEASE LOG IN</h1>
-    <LoginPage/>
-    </React.Fragment>
-)
+    )
 }
 
 export default Vocabulary;
