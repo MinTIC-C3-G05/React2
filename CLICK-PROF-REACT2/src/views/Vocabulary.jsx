@@ -13,9 +13,13 @@ function Vocabulary() {
     const [ocultarDefinition, setOcultarDefinition] = useState("show")
    
 
+    
+
        // GET PALABRAS BASE DE DATOS
     
    useEffect(() => {
+      setTimeout(()=>{
+          console.log("it's ready!")
       
 
        
@@ -31,6 +35,8 @@ function Vocabulary() {
                         return
                     }
                 })
+
+            },9000)
             });
     
 
@@ -134,7 +140,10 @@ function Vocabulary() {
     if (isAuthenticated){
     return (
         <React.Fragment>
-            <div>WELCOME {user.name}</div>
+            <div>
+                <h4 className="text-muted">WELCOME {user.name}</h4>
+                <h4 className="text-muted"> {user.email}</h4>
+            </div>
             <div style={{ textAlign: "center" }}>
                 <h1 className="display-1">VOCABULARY LIST</h1>
             </div>
