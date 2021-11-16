@@ -11,19 +11,34 @@ function Vocabulary() {
     const [palabras, setPalabras] = useState([])
     const [actualizar, setActualizar] = useState(0)
     const [ocultarDefinition, setOcultarDefinition] = useState("show")
-    const newPair = {
-        englishWord: englishWord,
-        definition: definition,
-    };
+   
 
+       // GET PALABRAS BASE DE DATOS
+    
+   useEffect(() => {
+      
 
-    // GET PALABRAS BASE DE DATOS
-    useEffect(() => {
-        axios.get("/vocabulary").then((response) => {
-            setPalabras(response.data);
-        });
-    }, [actualizar]);
-    //    FIN GET 
+       
+            axios.get("/vocabulary").then((response) => {
+    
+    
+                response.data.map(registro=>{
+                    if(registro.email === user.email){
+                        
+                        console.log(registro)
+                        palabras.push(registro)
+                    }else{
+                        return
+                    }
+                })
+            });
+    
+
+    
+}, [actualizar]);
+//    FIN GET 
+
+ 
 
 
 
@@ -37,6 +52,12 @@ function Vocabulary() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(newPair);
+
+        const newPair = {
+            englishWord: englishWord,
+            definition: definition,
+            email: user.email
+        };
 
         if (newPair.englishWord === "" || newPair.definition === "") {
             alert("todos los campos son obligatorios");
@@ -113,7 +134,7 @@ function Vocabulary() {
     if (isAuthenticated){
     return (
         <React.Fragment>
-            
+            <div>WELCOME {user.name}</div>
             <div style={{ textAlign: "center" }}>
                 <h1 className="display-1">VOCABULARY LIST</h1>
             </div>
