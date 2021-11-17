@@ -18,25 +18,18 @@ function Vocabulary() {
     // GET PALABRAS BASE DE DATOS
 
     useEffect(() => {
-        if(isAuthenticated){
-
-
+        if (isAuthenticated && !isLoading) {
             axios.get("/vocabulary").then((response) => {
                 response.data.map(registro => {
                     if (registro.email === user.email) {
-                        console.log(registro)
                         palabras.push(registro)
-                        
-                        
+                        console.log(registro)
+                        setActualizar(actualizar)
                     }
                 })
             })
-
-
         }
-        
-
-    }, []);
+    }, [actualizar]);
     //    FIN GET 
 
 
@@ -51,7 +44,7 @@ function Vocabulary() {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
 
         const newPair = {
             englishWord: englishWord,
@@ -67,7 +60,8 @@ function Vocabulary() {
 
         axios
             .post("/vocabulary", newPair)
-            //   .then((response) => this.setState({ newPair: response.data }))
+            .then((response) => palabras.push(response.data))
+            .then(alert("Created successfully"))
             .then(setActualizar(actualizar + 1));
     };
     // FIN DE POST NUEVO PAR DE PALABRAS
@@ -114,7 +108,7 @@ function Vocabulary() {
 
     // RENDER TABLE WITH DATA
     const renderPalabras = (palabra, index) => {
-        
+
         return (
             <tr key={palabra._id}>
                 <td>{index + 1}</td>
@@ -126,15 +120,15 @@ function Vocabulary() {
         )
     }
 
-   
+
 
 
     // *****************************************************************************************************
-    
+
 
     // RETURN
     if (isAuthenticated) {
-       
+
         return (
             <React.Fragment>
                 <div>

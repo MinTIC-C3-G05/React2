@@ -22,7 +22,7 @@ function TodoMachine() {
     //   setPost(response.data);
     //   // console.log(response.data)
     // });
-  }, [actualizado]);
+  }, []);
   
   function obtenerTodos(){
     axios.get("/todos").then((response) => {
