@@ -10,7 +10,7 @@ import {
 import Home from "./Home";
 import Nosotros from "./Nosotros";
 import Quiz from "./Quiz"
-import TodoMachine from "./TodoMachine";
+
 
 
 import Navbar from "react-bootstrap/Navbar";
@@ -39,7 +39,7 @@ function MiNavbar() {
                   <NavLink className="NavLink" activeClassName="selected" to="/" exact>Home</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="login" exact>Login</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/vocabulary">Vocabulary</NavLink>
-                  <NavLink className="NavLink" activeClassName="selected" to="/todoMachine">To do Machine</NavLink>
+                  
                   <NavLink className="NavLink" activeClassName="selected" to="/quiz">Quiz</NavLink>
                   <NavLink className="NavLink" activeClassName="selected" to="/videos">Videos</NavLink>
                  
@@ -69,7 +69,7 @@ function MiNavbar() {
           <Route path="/nosotros" component={Nosotros}></Route>
           <Route path="/login" component={LoginPageView}></Route>
 
-          <Route path="/todoMachine" component={TodoMachine}></Route>
+          
           <Route path="/quiz" exact component={Quiz}></Route>
 
           <Route path="/videos" exact component={VideosPage}></Route>

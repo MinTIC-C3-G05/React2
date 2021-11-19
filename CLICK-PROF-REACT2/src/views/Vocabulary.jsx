@@ -26,7 +26,7 @@ function Vocabulary() {
             axios.get("/vocabulary").then((response) => {
                 
                 setPalabras(response.data)
-                console.log("primero")
+               
                 // response.data.map(registro => {
                 //     if (registro.email === user.email) {
                 //         palabras.push(registro)
@@ -118,11 +118,12 @@ function Vocabulary() {
 
     // RENDER TABLE WITH DATA
     const renderPalabras = (palabra, index) => {
-        const numero = 1
+        
         if(palabra.email === user.email){
-        return (
+            
+        return(
             <tr key={palabra._id}>
-                <td>{index+1}</td>
+                <td>{index}</td>
                 <td>{palabra.englishWord}</td>
                 <td className={ocultarDefinition}>{palabra.definition}</td>
                 <td><button className="btn btn-warning" onClick={() => updatePalabras(palabra._id, palabra.englishWord)}>EDIT</button></td>
