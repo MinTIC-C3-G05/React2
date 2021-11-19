@@ -4,7 +4,6 @@ import questions from "../JSON Files/questions.json";
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginPage from "../components/LoginPage";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 export default function Quiz() {
 
@@ -72,13 +71,6 @@ export default function Quiz() {
   
   //FIN DEL POST
   };
-
-  
-  const history = useHistory();
-  const routeChange = () =>{ 
-    let path = "/login"; 
-    history.push(path);
-  }
 
 if (isAuthenticated) {
 
