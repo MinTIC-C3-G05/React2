@@ -8,9 +8,11 @@ function Vocabulary() {
     const { user, isAuthenticated, isLoading } = useAuth0()
     const [englishWord, setenglishWord] = useState("");
     const [definition, setDefinition] = useState("");
-    const [palabras, setPalabras] = useState([])
+    const [palabrasAntes, setPalabrasAntes] = useState([])
     const [actualizar, setActualizar] = useState(0)
     const [ocultarDefinition, setOcultarDefinition] = useState("show")
+    const [palabras, setPalabras] = useState([])
+
 
 
 
@@ -18,20 +20,31 @@ function Vocabulary() {
     // GET PALABRAS BASE DE DATOS
 
     useEffect(() => {
-        if (isAuthenticated && !isLoading) {
+        
+       
+        // if (isAuthenticated) {
             axios.get("/vocabulary").then((response) => {
-                response.data.map(registro => {
-                    if (registro.email === user.email) {
-                        palabras.push(registro)
-                        console.log(registro)
-                        setActualizar(actualizar)
-                    }
-                })
+                
+                setPalabras(response.data)
+                console.log("primero")
+                // response.data.map(registro => {
+                //     if (registro.email === user.email) {
+                //         palabras.push(registro)
+                //     }
+                // })
+
+
             })
-        }
+
+        // }
+        
+       
     }, [actualizar]);
     //    FIN GET 
 
+   
+   
+    
 
 
     // POST NUEVO PAR DE PALABRAS
@@ -71,11 +84,8 @@ function Vocabulary() {
 
     // DELETE PALABRAS
     const deletePalabra = (id) => {
-
         console.log(id);
-
         axios.delete("/vocabulary/" + id).then(alert("It was deleted successfully!")).then(setActualizar(actualizar + 1));
-
     };
 
 
@@ -108,16 +118,22 @@ function Vocabulary() {
 
     // RENDER TABLE WITH DATA
     const renderPalabras = (palabra, index) => {
-
+        const numero = 1
+        if(palabra.email === user.email){
         return (
             <tr key={palabra._id}>
-                <td>{index + 1}</td>
+                <td>{index+1}</td>
                 <td>{palabra.englishWord}</td>
                 <td className={ocultarDefinition}>{palabra.definition}</td>
                 <td><button className="btn btn-warning" onClick={() => updatePalabras(palabra._id, palabra.englishWord)}>EDIT</button></td>
                 <td><button className="btn btn-danger" onClick={() => deletePalabra(palabra._id)}>Delete</button></td>
             </tr>
+            
         )
+
+        
+    }
+
     }
 
 
