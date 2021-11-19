@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "../css/quiz.css";
-import questions from "../JSON Files/questions.json"
+import questions from "../JSON Files/questions.json";
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginPage from "../components/LoginPage";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Quiz() {
 
@@ -9,6 +13,7 @@ export default function Quiz() {
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState("");
+  const { user, isAuthenticated } = useAuth0();
   // const [activeClass, setActiveClass] = useState(false);
 
   const gettingLevel = () => {
@@ -52,6 +57,31 @@ export default function Quiz() {
     setLevel("A0");
   };
 
+  // POST NUEVO LEVEL
+
+  const submitScore = () =>{
+
+  const Result = {
+    email: user.email,
+    level: level
+  };
+
+  axios
+  .post("/test", Result)
+  .then(alert("You have finished!"));
+  
+  //FIN DEL POST
+  };
+
+  
+  const history = useHistory();
+  const routeChange = () =>{ 
+    let path = "/login"; 
+    history.push(path);
+  }
+
+if (isAuthenticated) {
+
   return (
     <div className="app">
       {showScore ? (
@@ -59,6 +89,8 @@ export default function Quiz() {
           You scored {score} out of {questions.length} and your level is {level}
           <div>
             <button onClick={startAgain}>START AGAIN</button>
+            <br />
+            <a href='/login'><button onClick={submitScore}> FINISH!</button></a>
           </div>
           <br />
         </div>
@@ -87,4 +119,12 @@ export default function Quiz() {
       )}
     </div>
   );
+}
+
+return (
+  <React.Fragment>
+      <h1>PLEASE LOG IN</h1>
+      <LoginPage />
+  </React.Fragment>
+)
 }
