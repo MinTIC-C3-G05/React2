@@ -115,7 +115,8 @@ if (isAuthenticated) {
 
 return (
   <React.Fragment>
-      <h1>PLEASE LOG IN</h1>
+      <br/>
+      <h4 class="font-family">PLEASE LOG IN</h4>
       <LoginPage />
   </React.Fragment>
 )

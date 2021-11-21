@@ -39,7 +39,7 @@ let CardNum = numRandom();
 const TarjetasVideos = () => {
     return (
       <div class="container">
-			<h3>Tendencias</h3>
+			<h3 class="font-family">Tendencias</h3>
 			    	<div class="row">
 			    	<div class="col-4">
 			    		<div class="card">
