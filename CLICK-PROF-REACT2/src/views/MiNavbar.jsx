@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from '@auth0/auth0-react'
 import { Avatar, Icon } from '@material-ui/core'
-import logo from "../img/CLIK_PROF_LOGO.png"
+import logo from "../img/CLIK_PROF_LOGO_SIN_FONDO.png"
 
 import {
   BrowserRouter as Router,
