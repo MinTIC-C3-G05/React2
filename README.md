@@ -12,6 +12,11 @@ Comando: npm install @auth0/auth0-react
 Comando: npm install react-bootstrap bootstrap@5.1.3
 
 
-
 3. Axios
 Comando: npm i axios
+
+4. Material UI
+Comando: npm install @material-ui/core
+
+5. Material UI - ICONS
+Commando: npm install @material-ui/icons
