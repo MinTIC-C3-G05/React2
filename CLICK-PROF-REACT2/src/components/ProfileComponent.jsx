@@ -120,7 +120,7 @@ function ProfileComponent() {
 
 
               {/* USER INFORMATION */}
-        <div style={{background:""}}>
+        <div style={{background:"", textAlign:"center", display:"flex", justifyContent:"left"}}>
               <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#456' }}>
       <ListItem>
         <ListItemAvatar>
