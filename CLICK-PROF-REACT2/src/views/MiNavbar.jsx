@@ -28,6 +28,7 @@ import LoginPageView from "./LoginPageView";
 import Vocabulary from "./Vocabulary";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LogOut from "../components/LogOut";
+import LoginPage from "../components/LoginPage";
 
 
 
@@ -60,9 +61,12 @@ function MiNavbar() {
                  
 
                 </Nav>
-                <Avatar alt="User Picture" src={isAuthenticated? user.picture : ""}  />
                 
-                {isAuthenticated? <LogOut/> : <p></p> }
+                {isAuthenticated? <Avatar alt="User Picture" src={isAuthenticated? user.picture : ""}  /> : <p></p> }
+                
+                
+                {isAuthenticated? <LogOut/> : <LoginPage/> }
+                
                 
                 
                 
