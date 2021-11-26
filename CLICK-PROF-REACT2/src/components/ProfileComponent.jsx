@@ -24,6 +24,7 @@ import {
 
 
 import theme from "../css/TemaConfig";
+import LogOut from "./LogOut";
 
 
 
@@ -70,18 +71,31 @@ function ProfileComponent() {
     isAuthenticated && (
       <ThemeProvider theme={theme}>
         <Divider/>
+        
         <div
           style={{
             background: "#212529",
             height: "200px",
-            clipPath: "ellipse(60% 100% at 50% 2%)",
+            
             textAlign: "center",
           }}
         >
-          <Typography variant="h2" color="primary" align="left">
-            PROFILE
-          </Typography>
-          <span style={{ textAlign: "center" }}>
+          
+
+         <div style={{ textAlign:"center", display:"flex", justifyContent:"space-between"}}>
+            
+
+            <div style={{marginRight:"20px"}}>
+            
+            </div>
+            
+         </div>
+
+
+
+
+
+          <span style={{ textAlign: "center", marginTop:"5%" }}>
             <img
               src={user.picture}
               alt={user.name}
@@ -89,14 +103,20 @@ function ProfileComponent() {
                 clipPath: "circle(50% at 50% 50%)",
                 height: "100px",
                 width: "100px",
-                position: "absolute",
+               
+                marginTop:"4%"
                 
               }}
             />;
            
           </span>
-
+          
+         
+          
         </div>
+        <Typography variant="h4" color="primary" align="center" >
+              PROFILE
+            </Typography>
 
 
               {/* USER INFORMATION */}
@@ -134,13 +154,15 @@ function ProfileComponent() {
         <Divider  color="primary"></Divider>
         <br />
 
-
-        <div style={{display:"flex", justifyContent:"space-around"}}>
+        <div style={{display:"flex", justifyContent:"space-around",zIndex:"1"}}>
           <Button color="primary" variant="contained" href="/quiz" > <Icon>quiz</Icon> TEST </Button>
           <Button color="primary" variant="contained" href="/vocabulary" > <Icon>translate</Icon> VOCABULARY </Button>
           <Button color="primary" variant="contained" href="/videos" > <Icon>video_library</Icon> RESOURCES </Button>
           
         </div>
+        
+
+        
       
         
       </ThemeProvider>

@@ -1,5 +1,5 @@
 import {createMuiTheme} from '@material-ui/core/'
-import { purple, indigo } from '@material-ui/core/colors';
+import { purple, indigo, red } from '@material-ui/core/colors';
 
 
 const theme = createMuiTheme({
@@ -8,8 +8,12 @@ const theme = createMuiTheme({
             main: indigo[500]
         },
         secondary:{
-            main:purple[500]
+            main:red[600]
+        },
+        third:{
+            main:purple[600]
         }
+
     }
 })
 

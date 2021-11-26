@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth0 } from '@auth0/auth0-react'
 import { Avatar, Icon } from '@material-ui/core'
+import logo from "../img/CLIK_PROF_LOGO.png"
 
 import {
   BrowserRouter as Router,
@@ -26,6 +27,7 @@ import VideosPage from "./VideosPage";
 import LoginPageView from "./LoginPageView";
 import Vocabulary from "./Vocabulary";
 import DeleteIcon from "@material-ui/icons/Delete";
+import LogOut from "../components/LogOut";
 
 
 
@@ -44,7 +46,8 @@ function MiNavbar() {
         <div>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-              <Navbar.Brand href="/">CLICK-PROF</Navbar.Brand>
+              <img src={logo} style={{height:"50px", width:"50px"}}/>
+              <Navbar.Brand href="/"> <h4>CLICK-PROF</h4></Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="justify-content-center" style={{ flex: 1}}>
@@ -58,6 +61,9 @@ function MiNavbar() {
 
                 </Nav>
                 <Avatar alt="User Picture" src={isAuthenticated? user.picture : ""}  />
+                
+                {isAuthenticated? <LogOut/> : <p></p> }
+                
                 
                 
               </Navbar.Collapse>
