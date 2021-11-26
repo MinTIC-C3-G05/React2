@@ -12,6 +12,7 @@ export default function Quiz() {
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState("");
+  const [preLevel, setpreLevel] = useState("");
   const { user, isAuthenticated } = useAuth0();
   // const [activeClass, setActiveClass] = useState(false);
 
@@ -47,30 +48,64 @@ export default function Quiz() {
     
     } else {
       setShowScore(true);
+      getInfo ();
     }
   };
   const startAgain = () => {
     setCurrentQuestion(0);
     setShowScore(false);
     setScore(0);
-    setLevel("A0");
+    setLevel("");
   };
 
-  // POST NUEVO LEVEL
+  const getInfo = () => {
+    axios.get("/test").then((response) => {
+    response.data.map((element) => {
+      if (user.email === element.email) {
+        setpreLevel(element.level);
+      }
+    });
+  });
+}
+
+  const submitNewLevel = () => {
+
+    // PUT NUEVO LEVEL
+        const newResult ={
+          email: user.email,
+          level: level
+        };
+
+        axios
+        .put("/test", newResult)
+        .then(alert("You have finished again!"));
+//FIN DEL PUT
+      }
 
   const submitScore = () =>{
 
-  const Result = {
-    email: user.email,
-    level: level
-  };
+// POST DEL LEVEL
+          const Result = {
+            email: user.email,
+            level: level
+          };
 
-  axios
-  .post("/test", Result)
-  .then(alert("You have finished!"));
-  
-  //FIN DEL POST
-  };
+          axios
+          .post("/test", Result)
+          .then(alert("You have finished!"));
+//FIN DEL POST
+        }
+
+  const chosePutPost = () => {
+    if (preLevel !== "") {
+      console.log("vamos Put, ya habia datos antes");
+      submitNewLevel ()
+    }
+    else {
+      console.log("vamos Post, es un dato inédito");
+      submitScore ()
+    }
+  }
 
 if (isAuthenticated) {
 
@@ -82,7 +117,7 @@ if (isAuthenticated) {
           <div>
             <button onClick={startAgain}>START AGAIN</button>
             <br />
-            <a href='/login'><button onClick={submitScore}> FINISH!</button></a>
+            <a href='/login'><button onClick={chosePutPost}> FINISH!</button></a>
           </div>
           <br />
         </div>
