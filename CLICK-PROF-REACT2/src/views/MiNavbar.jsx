@@ -1,4 +1,6 @@
 import React from "react";
+import { useAuth0 } from '@auth0/auth0-react'
+import { Avatar, Icon } from '@material-ui/core'
 
 import {
   BrowserRouter as Router,
@@ -23,9 +25,19 @@ import "../css/Navbar.css";
 import VideosPage from "./VideosPage";
 import LoginPageView from "./LoginPageView";
 import Vocabulary from "./Vocabulary";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+
+
+
+
+
+
+
 
 
 function MiNavbar() {
+  const { user, isAuthenticated, isLoading } = useAuth0()
   return (
     <React.Fragment>
       <Router>
@@ -44,22 +56,10 @@ function MiNavbar() {
                   <NavLink className="NavLink" activeClassName="selected" to="/videos">Videos</NavLink>
                  
 
-                  <NavDropdown className="NavLink" title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">
-                      Action
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">
-                      Something
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                      Separated link
-                    </NavDropdown.Item>
-                  </NavDropdown>
                 </Nav>
+                <Avatar alt="User Picture" src={isAuthenticated? user.picture : ""}  />
+                
+                
               </Navbar.Collapse>
             </Container>
           </Navbar>

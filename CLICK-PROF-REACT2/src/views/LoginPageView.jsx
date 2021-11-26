@@ -15,10 +15,10 @@ function LoginPageView() {
     }else{ return (
         <React.Fragment>
          <div>
-             <h1>LOG IN TO YOUR ACCOUNT</h1>
+            
              
              <ProfileComponent></ProfileComponent>
-             <LogOut/>
+             
              </div>
         </React.Fragment> )
              }

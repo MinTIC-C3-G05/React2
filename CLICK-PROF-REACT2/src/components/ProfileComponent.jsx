@@ -1,42 +1,151 @@
-import React, {useState} from 'react'
-import {useAuth0} from '@auth0/auth0-react'
-import axios from 'axios'
+import React, { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+
 import {
-    
-    Link
-  } from "react-router-dom";
+  Icon,
+  IconButton,
+  makeStyles,
+  Typography,
+  ThemeProvider,
+  Divider,
+  styled,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+ 
+
+  
+} from "@material-ui/core";
+
+
+import theme from "../css/TemaConfig";
+
+
+
+
+
+
+
+
+
+
+
+const useStyle = makeStyles({
+  botonPersonalizado: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
+    height: 48,
+    padding: "0 30px",
+  },
+});
 
 function ProfileComponent() {
-    const {user, isAuthenticated, isLoading} = useAuth0()
+  const classes = useStyle();
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  const [level, setLevel] = useState("");
+
+  axios.get("/test").then((response) => {
+    response.data.map((element) => {
+      if (user.email === element.email) {
+        setLevel(element.level);
+        console.log(element);
+      }
+    });
+  });
+
+  if (isLoading) {
+    return <div>Loading.....</div>;
+  }
+  return (
+    isAuthenticated && (
+      <ThemeProvider theme={theme}>
+        <Divider/>
+        <div
+          style={{
+            background: "#212529",
+            height: "200px",
+            clipPath: "ellipse(60% 100% at 50% 2%)",
+            textAlign: "center",
+          }}
+        >
+          <Typography variant="h2" color="primary" align="left">
+            PROFILE
+          </Typography>
+          <span style={{ textAlign: "center" }}>
+            <img
+              src={user.picture}
+              alt={user.name}
+              style={{
+                clipPath: "circle(50% at 50% 50%)",
+                height: "100px",
+                width: "100px",
+                position: "absolute",
+                
+              }}
+            />;
+           
+          </span>
+
+        </div>
 
 
-    const [level, setLevel] = useState("")
+              {/* USER INFORMATION */}
+        <div style={{background:""}}>
+              <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#456' }}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <Icon>badge</Icon>
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Name" secondary={user.name} />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <Icon>emailrounded</Icon>
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Email" secondary={user.email} />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+           <Icon>graderounded
+</Icon>
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Level" secondary={level === "" ? <Link to="/quiz">No level Registered. Please take our test</Link> : level} />
+      </ListItem>
+    </List>
+    </div>
 
-    axios.get("/test").then((response)=>{
-        response.data.map(element=>{
-            if(user.email === element.email){
-                setLevel(element.level)
-                console.log(element)
-
-            }
-        })
-    })
+        <Divider  color="#123"></Divider>
+        <Divider  color="primary"></Divider>
+        <br />
 
 
-
-    if (isLoading){
-        return <div>Loading.....</div>
-    }
-        return (
-            isAuthenticated &&(
-                <div>
-                    <img src={user.picture} alt={user.name}/>
-                    <h2>Hello:{user.name}</h2>
-                    <p>Email: {user.email}</p>
-                    <p>Level:{level===""? <Link to="/quiz">Please take our test</Link>: level}</p>
-                </div>
-            )
+        <div style={{display:"flex", justifyContent:"space-around"}}>
+          <Button color="primary" variant="contained" href="/quiz" > <Icon>quiz</Icon> TEST </Button>
+          <Button color="primary" variant="contained" href="/vocabulary" > <Icon>translate</Icon> VOCABULARY </Button>
+          <Button color="primary" variant="contained" href="/videos" > <Icon>video_library</Icon> RESOURCES </Button>
+          
+        </div>
+      
+        
+      </ThemeProvider>
     )
-};
+  );
+}
 
-export default ProfileComponent
+export default ProfileComponent;
