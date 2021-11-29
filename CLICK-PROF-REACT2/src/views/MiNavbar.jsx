@@ -53,7 +53,8 @@ function MiNavbar() {
               <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="justify-content-center" style={{ flex: 1}}>
                   <NavLink className="NavLink" activeClassName="selected" to="/" exact>Home</NavLink>
-                  <NavLink className="NavLink" activeClassName="selected" to="login" exact>Login</NavLink>
+                 { isAuthenticated ? 
+                  <NavLink className="NavLink" activeClassName="selected" to="login" exact>Profile</NavLink> : <p></p>}
                   <NavLink className="NavLink" activeClassName="selected" to="/vocabulary">Vocabulary</NavLink>
                   
                   <NavLink className="NavLink" activeClassName="selected" to="/quiz">Quiz</NavLink>
